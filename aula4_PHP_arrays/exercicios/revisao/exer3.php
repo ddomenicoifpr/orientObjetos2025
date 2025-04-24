@@ -3,7 +3,7 @@
 $paises = array();
 
 //1- Leitura dos dados dos países
-for($i=1; $i<=2; $i++) {
+for($i=1; $i<=5; $i++) {
     echo "\n-----País " . $i . "-----\n";
     $pais['nome'] = readline("Informe o nome: ");
     $pais['continente'] = readline("Informe o continente: ");
