@@ -7,6 +7,18 @@ abstract class Veiculo {
 
     public abstract function getCustoViagem();
 
+    public abstract function getTipo();
+
+    public function __toString() {
+        $dados = "O veículo " . $this->getTipo();
+        $dados .= ",foi alugado por R$ " . $this->valorAluguel; 
+        $dados .= ", rodou " . $this->kmRodados;
+        $dados .= " quilômetros com custo total de R$ " . $this->getCustoViagem();
+        $dados .= ".";
+
+        return $dados;
+    }
+
     public function getValorAluguel(): float
     {
         return $this->valorAluguel;

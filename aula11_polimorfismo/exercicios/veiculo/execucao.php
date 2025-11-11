@@ -42,4 +42,4 @@ switch ($tipo) {
 $veiculo->setValorAluguel(readLine("Informe o valor do aluguel: "));
 $veiculo->setKmRodados(readLine("Informe a quantidade de quilometros rodados: "));
 
-printf("\nO valor total da viagem é: R$ %.2f\n", $veiculo->getCustoViagem());
+echo $veiculo . "\n";

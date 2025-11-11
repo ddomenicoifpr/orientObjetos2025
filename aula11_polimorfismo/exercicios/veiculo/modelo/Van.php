@@ -9,4 +9,8 @@ class Van extends Veiculo {
         return $custo;
     }
 
+    public function getTipo() {
+        return "Van";
+    }
+
 }

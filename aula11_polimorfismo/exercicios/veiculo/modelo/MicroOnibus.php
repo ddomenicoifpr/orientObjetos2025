@@ -9,4 +9,8 @@ class MicroOnibus extends Veiculo {
         return $custo;
     }
 
+    public function getTipo() {
+        return "Micro-ônibus";
+    }
+
 }
