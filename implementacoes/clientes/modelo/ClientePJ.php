@@ -8,6 +8,19 @@ class ClientePJ extends Cliente {
     private string $razaoSocial;
     private string $cnpj;
 
+    //Métodos
+    public function getNomeCompleto() {
+        return $this->razaoSocial;
+    }
+
+    public function getNroDoc() {
+        return $this->cnpj;
+    }
+
+    public function getTipo() {
+        return "J";
+    }
+
     
     //GET e SET
      public function getRazaoSocial(): string

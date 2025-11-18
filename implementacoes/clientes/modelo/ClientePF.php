@@ -8,6 +8,19 @@ class ClientePF extends Cliente {
     private string $nome;
     private string $cpf;
 
+    //Métodos
+    public function getNomeCompleto() {
+        return $this->nome;
+    }
+
+    public function getNroDoc() {
+        return $this->cpf;
+    }
+
+    public function getTipo() {
+        return "F";
+    }
+
     //GET e SET
     public function getNome(): string
     {

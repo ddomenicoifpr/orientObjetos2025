@@ -8,6 +8,9 @@ abstract class Cliente {
     protected string $email;
 
     //Métodos
+    public abstract function getNomeCompleto();
+    public abstract function getNroDoc();
+    public abstract function getTipo();
 
     //GETs e SET
     public function getId(): int

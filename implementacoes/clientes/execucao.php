@@ -3,6 +3,13 @@
 require_once("modelo/ClientePF.php");
 require_once("modelo/ClientePJ.php");
 
+//Teste da conexão com o banco
+require_once("util/Conexao.php");
+$pdo = Conexao::getConexao();
+print_r($pdo);
+exit;
+
+
 do {
     echo "\n\n----CADASTRO DE CLIENTES----\n";
     echo "1- Cadastrar Cliente PF\n";
