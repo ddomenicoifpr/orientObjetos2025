@@ -2,14 +2,17 @@
 
 require_once("modelo/ClientePF.php");
 require_once("modelo/ClientePJ.php");
+require_once("dao/ClienteDao.php");
 
 //Teste da conexão com o banco
+/*
 require_once("util/Conexao.php");
 $pdo = Conexao::getConexao();
 print_r($pdo);
 exit;
+*/
 
-
+//MENU
 do {
     echo "\n\n----CADASTRO DE CLIENTES----\n";
     echo "1- Cadastrar Cliente PF\n";
@@ -22,15 +25,41 @@ do {
     $opcao = readline("Informe a opção: ");
     switch ($opcao) {
         case 1:
-            echo "Não implementado!\n";
+            $cliente = new ClientePF();
+            $cliente->setNomeSocial(readline("Informe o nome social: "));
+            $cliente->setEmail(readline("Informe o e-mail: "));
+            $cliente->setNome(readline("Informe o nome: "));
+            $cliente->setCpf(readline("Informe o CPF: "));
+
+            //Persistir o objeto no banco de dados
+            $dao = new ClienteDao();
+            $dao->inserir($cliente);
+            echo "Cliente PF inserido com sucesso!";
             break;
 
         case 2:
-            echo "Não implementado!\n";
+            //Ler os dados e criar o objeto 
+            $cliente = new ClientePJ();
+            $cliente->setNomeSocial(readline("Informe o nome social: "));
+            $cliente->setEmail(readline("Informe o e-mail: "));
+            $cliente->setRazaoSocial(readline("Informe a razão social: "));
+            $cliente->setCnpj(readline("Informe o CNPJ: "));
+
+            //Persistir o objeto no banco de dados
+            $dao = new ClienteDao();
+            $dao->inserir($cliente);
+            echo "Cliente PJ inserido com sucesso!";
             break;
 
         case 3:
-            echo "Não implementado!\n";
+            $dao = new ClienteDao();
+            $clientes = $dao->listar();
+
+            foreach($clientes as $c) {
+                echo  $c["id"] . " - " . $c["nome_social"] . "\n";
+            }
+
+            
             break;
 
         case 4:
