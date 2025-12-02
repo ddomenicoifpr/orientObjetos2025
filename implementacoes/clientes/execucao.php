@@ -56,18 +56,48 @@ do {
             $clientes = $dao->listar();
 
             foreach($clientes as $c) {
-                echo  $c["id"] . " - " . $c["nome_social"] . "\n";
+                echo  $c . "\n";
             }
-
-            
             break;
 
         case 4:
-            echo "Não implementado!\n";
+            //1- Ler o ID do cliente a ser buscar     
+            $id = readline("Informe o ID do cliente: ");
+
+            //2- Obter o cliente do banco de dados e imprimí-lo
+            $dao = new ClienteDao();
+            $cliente = $dao->buscarPorId($id);
+
+            //if($cliente != null)
+            if($cliente)
+                echo $cliente . "\n";
+            else
+                echo "Cliente não encontrado!\n";
+
             break;
 
         case 5:
-            echo "Não implementado!\n";
+            $dao = new ClienteDao();
+            
+            //1- Listar os clientes
+            $clientes = $dao->listar();
+            foreach($clientes as $c) {
+                echo  $c . "\n";
+            }
+
+            //2- Ler o ID do cliente que será excluído
+            $id = readline("Informe o ID do cliente:");
+
+            //2.1- Validar se o ID corresponde a um cliente
+            $cliente = $dao->buscarPorId($id);
+            if($cliente) {
+                //3- Excluir do banco de dados (pelo ID)
+                $dao->excluirPorId($id);
+                echo "Cliente excluído com sucesso!\n";
+                
+            } else
+                echo "Cliente não encontrado!\n";
+
             break;
 
         case 0:

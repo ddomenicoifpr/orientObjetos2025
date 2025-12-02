@@ -45,8 +45,55 @@ class ClienteDao {
         $stmt->execute();
         $dados = $stmt->fetchAll();
 
-        //TODO - Converter os dados do array para objetos
+        //Converter os dados do array associativo para objeto
+        $clientes = $this->map($dados);
+        return $clientes;        
+    }
 
-        return $dados;
+    public function buscarPorId(int $idCliente) {
+        $sql = "SELECT * FROM clientes WHERE id = ?";
+        $conn = Conexao::getConexao();
+        $stmt = $conn->prepare($sql);
+        $stmt->execute([$idCliente]);
+        $dados = $stmt->fetchAll();
+
+        //Converter os dados do array associativo para objeto
+        $clientes = $this->map($dados);
+        if(! empty($clientes))
+            return $clientes[0];
+
+        return null;
+    }
+
+    public function excluirPorId($idCliente) {
+        $sql = "DELETE FROM clientes WHERE id = ?";
+        $conn = Conexao::getConexao();
+        $stmt = $conn->prepare($sql);
+        $stmt->execute([$idCliente]);
+    }
+
+    private function map($dados) {
+        $clientes = array();
+        foreach($dados as $d) {
+            $cliente = null;
+            if($d['tipo'] == 'F') {
+                $cliente = new ClientePF();
+                $cliente->setNome($d['nome']);
+                $cliente->setCpf($d['cpf']);
+
+            } else {
+                $cliente = new ClientePJ();
+                $cliente->setRazaoSocial($d['razao_social']);
+                $cliente->setCnpj($d['cnpj']);
+            }
+
+            $cliente->setId($d['id']);
+            $cliente->setNomeSocial($d['nome_social']);
+            $cliente->setEmail($d['email']);
+
+            array_push($clientes, $cliente);
+        }
+
+        return $clientes;
     }
 }
